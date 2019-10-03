@@ -1,10 +1,23 @@
-extends Control
+extends Node
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+enum LOCATION{
+	menu,
+	game
+}
 
-# Called when the node enters the scene tree for the first time.
+onready var anim=$titlescreen/AnimationPlayer
+
+var location=0
 func _ready():
-	$Label.set_text("ok" if (bdd.test_DB()==true) else "nop")
-	
+	bdd.test_DB()
+	pass
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if location==LOCATION.menu:
+			go()
+
+func go():
+	anim.play("go")
+	location=LOCATION.game
+	get_node("scene/player").set_rdy()

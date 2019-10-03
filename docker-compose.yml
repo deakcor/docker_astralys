@@ -2,28 +2,37 @@ version: '3.3'
 
 services:
   build-game-linux:
-    image : ioribranford/godot-docker:3.1.1
+    image : barichello/godot-ci:3.1.1
     volumes:
       - './game:/build/src'
       - './build:/build/output'
     environment:
       - /bin/bash
-    command: godot --export 'Linux/X11' /build/output/test --path /build/src
+    command: godot --export 'Linux/X11' /build/output/astralys --path /build/src
 
   build-game-html:
-    image : ioribranford/godot-docker:3.1.1
+    image : barichello/godot-ci:3.1.1
     volumes:
       - './game:/build/src'
       - './build:/build/output'
     environment:
       - /bin/bash
-    command: godot --export-debug 'HTML5' /build/output/test.html --path /build/src
+    command: godot --export-debug 'HTML5' /build/output/index.html --path /build/src
 
   run-site:
     image : darcemontv/node_astralys
     volumes:
       - './bdd:/bdd'
-      - './build:/build'
+      - './build:/views/build'
     ports :
       - 8080:8080
+
+  run-game:
+    image : barichello/godot-ci:3.1.1
+    volumes:
+      - './game:/build/src'
+      - '/tmp/.X11-unix:/tmp/.X11-unix'
+    environment:
+      - DISPLAY=$DISPLAY
+    command: godot --path /build/src
 
