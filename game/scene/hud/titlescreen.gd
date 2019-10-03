@@ -20,4 +20,3 @@ func _input(event):
 func go():
 	anim.play("go")
 	location=LOCATION.game
-	get_node("scene/player").set_rdy()

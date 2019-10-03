@@ -1,6 +1,7 @@
 version: '3.3'
 
 services:
+  #Build the game in linux executable
   build-game-linux:
     image : barichello/godot-ci:3.1.1
     volumes:
@@ -9,7 +10,7 @@ services:
     environment:
       - /bin/bash
     command: godot --export 'Linux/X11' /build/output/astralys --path /build/src
-
+  #Build the game in HTML5
   build-game-html:
     image : barichello/godot-ci:3.1.1
     volumes:
@@ -18,7 +19,7 @@ services:
     environment:
       - /bin/bash
     command: godot --export-debug 'HTML5' /build/output/index.html --path /build/src
-
+  #Run the nodejs site
   run-site:
     image : darcemontv/node_astralys
     volumes:
@@ -26,13 +27,22 @@ services:
       - './build:/views/build'
     ports :
       - 8080:8080
-
+  #Run the game without export it (thanks to godot editor)
   run-game:
-    image : barichello/godot-ci:3.1.1
+    image : darcemontv/godot-dockerfile:latest
     volumes:
       - './game:/build/src'
       - '/tmp/.X11-unix:/tmp/.X11-unix'
     environment:
       - DISPLAY=$DISPLAY
     command: godot --path /build/src
+  #Edit the game with godot editor
+  edit-game:
+    image : darcemontv/godot-dockerfile:latest
+    volumes:
+      - './game:/build/src'
+      - '/tmp/.X11-unix:/tmp/.X11-unix'
+    environment:
+      - DISPLAY=$DISPLAY
+    command: godot -e --path /build/src
 
