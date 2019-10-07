@@ -27,6 +27,7 @@ services:
       - './build:/views/build'
     ports :
       - 8080:8080
+
   #Run the game without export it (thanks to godot editor)
   run-game:
     image : darcemontv/godot-dockerfile:latest

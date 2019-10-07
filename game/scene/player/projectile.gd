@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+class_name Projectile
 var speed=1000
 func _ready():
 	pass # Replace with function body.

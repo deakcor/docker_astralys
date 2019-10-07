@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://image/vaisseau/vaisseau.png" type="Texture" id=1]
 [ext_resource path="res://scene/player/player.gd" type="Script" id=2]
@@ -18,10 +18,38 @@ flag_disable_z = true
 direction = Vector3( -1, 0, 0 )
 spread = 20.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 100.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale_curve = SubResource( 3 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "stopparticule"
+} ]
+}
 
 [node name="player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -35,7 +63,6 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="reacteur_particle" type="Particles2D" parent="."]
-visible = false
 position = Vector2( -95, 52 )
 amount = 20
 randomness = 0.5
@@ -44,7 +71,6 @@ process_material = SubResource( 4 )
 texture = ExtResource( 3 )
 
 [node name="reacteur_particle2" type="Particles2D" parent="."]
-visible = false
 position = Vector2( -95, -56 )
 amount = 20
 randomness = 0.5
@@ -55,4 +81,8 @@ texture = ExtResource( 3 )
 [node name="timer_shoot" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 2.0
+anims/die = SubResource( 5 )
 [connection signal="timeout" from="timer_shoot" to="." method="_on_timer_shoot_timeout"]

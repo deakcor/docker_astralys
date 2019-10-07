@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://font/naza.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+resource_local_to_scene = true
+size = 48
+font_data = ExtResource( 1 )
+
+[node name="HBoxContainer" type="HBoxContainer"]
+margin_right = 1520.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 1468, 0 )
+custom_constants/separation = 500
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nom" type="Label" parent="."]
+margin_right = 600.0
+margin_bottom = 58.0
+rect_min_size = Vector2( 600, 0 )
+custom_fonts/font = SubResource( 1 )
+text = "Name"
+align = 1
+valign = 1
+
+[node name="score" type="Label" parent="."]
+margin_left = 1100.0
+margin_right = 1248.0
+margin_bottom = 58.0
+custom_fonts/font = SubResource( 1 )
+text = "Score"
+align = 1
+valign = 1

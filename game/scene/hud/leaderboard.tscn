@@ -1,0 +1,165 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://image/hud/ninepatch.png" type="Texture" id=1]
+[ext_resource path="res://image/hud/button_ok.png" type="Texture" id=2]
+[ext_resource path="res://font/space.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://image/hud/button_ok_focus.png" type="Texture" id=4]
+[ext_resource path="res://scene/hud/ld_entry.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scene/hud/leaderboard.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:rect_position:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -1000.0, 50.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1400 ), Vector2( 0, 900 ), Vector2( 0, 964 ) ]
+}
+
+[node name="leaderboard" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 960, 540 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 200.0
+margin_top = 50.0
+margin_right = -200.0
+margin_bottom = -150.0
+texture = ExtResource( 1 )
+patch_margin_left = 100
+patch_margin_top = 100
+patch_margin_right = 100
+patch_margin_bottom = 100
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 32.0
+margin_right = -20.0
+margin_bottom = -32.0
+custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" parent="Control/NinePatchRect/VBoxContainer" instance=ExtResource( 5 )]
+margin_right = 1480.0
+margin_bottom = 58.0
+
+[node name="ColorRect" type="ColorRect" parent="Control/NinePatchRect/VBoxContainer"]
+margin_top = 74.0
+margin_right = 1480.0
+margin_bottom = 78.0
+rect_min_size = Vector2( 0, 4 )
+color = Color( 0.0392157, 0.784314, 1, 0.588235 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/NinePatchRect/VBoxContainer"]
+margin_top = 94.0
+margin_right = 1480.0
+margin_bottom = 794.0
+rect_min_size = Vector2( 0, 700 )
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/NinePatchRect/VBoxContainer/ScrollContainer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -116.0
+custom_constants/separation = 100
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="button_reset" type="TextureButton" parent="HBoxContainer"]
+margin_left = 721.0
+margin_right = 910.0
+margin_bottom = 116.0
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer/button_reset"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 2 )
+text = "reset bdd"
+align = 1
+valign = 1
+
+[node name="button_main" type="TextureButton" parent="HBoxContainer"]
+margin_left = 1010.0
+margin_right = 1199.0
+margin_bottom = 116.0
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer/button_main"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 2 )
+text = "Main menu"
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "open"
+playback_speed = 2.0
+anims/open = SubResource( 3 )
+[connection signal="pressed" from="HBoxContainer/button_reset" to="." method="_on_button_reset_pressed"]
+[connection signal="pressed" from="HBoxContainer/button_main" to="." method="_on_button_pressed"]
