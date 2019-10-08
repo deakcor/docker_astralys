@@ -7,6 +7,7 @@ It is a space shooter with a leaderboard.
 
 I made this game thanks to [Godot Engine](https://godotengine.org/), an open source game engine.
 I used the [image](https://hub.docker.com/r/barichello/godot-ci) of barichello on [Docker hub](https://hub.docker.com/) to compile my game, because it contains a handless version of Godot (I didn't need a display).
+The game uses a [sqlite](https://github.com/khairul169/gdsqlite) library for the leaderboard with the linux version. For the HTML5 version, the game sends GET and POST request to the site.
 #### Here the command to compile
 
    For the linux version.
