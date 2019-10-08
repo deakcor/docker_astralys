@@ -25,7 +25,7 @@ func _on_TextureButton_pressed():
 	go()
 
 func fin_partie():
-	$control/score_label.queue_free()
+	$control/score_label.visible=false
 	$scene/Timer.stop()
 	var ld_tmp=preload("res://scene/hud/leaderboard.tscn").instance()
 	ld_tmp.init(self)

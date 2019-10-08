@@ -23,7 +23,7 @@ services:
   run-site:
     image : darcemontv/node_astralys
     volumes:
-      - './bdd:/bdd'
+      - './bdd:/views/bdd'
       - './build:/views/build'
     ports :
       - 8080:8080

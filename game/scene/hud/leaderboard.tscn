@@ -7,11 +7,11 @@
 [ext_resource path="res://scene/hud/ld_entry.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scene/hud/leaderboard.gd" type="Script" id=6]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 30
 font_data = ExtResource( 3 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "open"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control:rect_position:y")
@@ -26,7 +26,7 @@ tracks/0/keys = {
 "values": [ -1000.0, 50.0, 0.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("HBoxContainer:rect_position")
+tracks/1/path = NodePath("HBoxContainer:rect_position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -35,7 +35,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.8, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 1400 ), Vector2( 0, 900 ), Vector2( 0, 964 ) ]
+"values": [ 1400.0, 900.0, 964.0 ]
 }
 
 [node name="leaderboard" type="Control"]
@@ -131,7 +131,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="HBoxContainer/button_reset"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "reset bdd"
 align = 1
 valign = 1
@@ -152,14 +152,16 @@ __meta__ = {
 [node name="Label" type="Label" parent="HBoxContainer/button_main"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Main menu"
 align = 1
 valign = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "open"
-playback_speed = 2.0
-anims/open = SubResource( 3 )
+anims/open = SubResource( 2 )
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
 [connection signal="pressed" from="HBoxContainer/button_reset" to="." method="_on_button_reset_pressed"]
 [connection signal="pressed" from="HBoxContainer/button_main" to="." method="_on_button_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

@@ -1,6 +1,6 @@
 extends KinematicBody2D
 class_name Player
-export var max_speed:int=500
+export var max_speed:int=1000
 var mouse_pos:Vector2
 var shoot_rdy=false
 var shoot_press=false
@@ -26,7 +26,7 @@ func _input(event):
 
 func _physics_process(delta):
 	var velocity=(mouse_pos-self.position)
-	move_and_slide(velocity.clamped(max_speed))
+	move_and_slide((velocity*3).clamped(max_speed))
 	if shoot_press and shoot_rdy:
 		shoot_rdy=false
 		$timer_shoot.start()
