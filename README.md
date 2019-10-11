@@ -20,7 +20,9 @@ The game uses a [sqlite](https://github.com/khairul169/gdsqlite) library for the
 
     docker-compose up build-game-html
    
-   But the game can be run and edit in a docker. I made this [image](https://hub.docker.com/r/darcemontv/godot-dockerfile) to do that, strongly inspired by barichello repo but with a Linux/X11 version of Godot inside and all the libraries to display the editor. The code can be found [here](https://github.com/deakcor/godot-dockerfile).
+There is some errors during the compiling but it's not a problem if the game is exported, it's due to Godot Engine.
+
+Also, the game can be run and edit in a docker. I made this [image](https://hub.docker.com/r/darcemontv/godot-dockerfile) to do that, strongly inspired by barichello repo but with a Linux/X11 version of Godot inside and all the libraries to display the editor. The code can be found [here](https://github.com/deakcor/godot-dockerfile).
 #### Here the command to run the editor
 To run the game.
 
